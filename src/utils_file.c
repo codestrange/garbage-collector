@@ -26,3 +26,32 @@ ArrayList parse_file(char *file_name) {
     append_arraylist(&arraylist, list);
     return arraylist;
 }
+
+List parse_line(char *line) {
+    List list = new_list(10);
+    int val = 0;
+    int row = 0;
+    int ok = 0;
+    while(*line) {
+        if(*line >= '0' && *line <= '9') {
+            val = val * 10 + (*line - '0');
+            ok = 0;
+        }
+        else if(*line == ','){
+            row = val;
+            val = 0;
+        }
+        else {
+            Position p = new_position(row, val);
+            append_list(&list, p);
+            val = 0;
+            ok = 1;
+        }
+        ++line;
+    }
+    if(!ok) {
+        Position p = new_position(row, val);
+        append_list(&list, p);
+    }
+    return list;
+}
