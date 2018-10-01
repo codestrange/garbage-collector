@@ -12,7 +12,7 @@ typedef struct List {
 } List;
 
 typedef struct ArrayList {
-    List* array;
+    List *array;
     int size;
     int capacity;
 } ArrayList;
