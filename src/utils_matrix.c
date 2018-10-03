@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "viewer.h"
+#include "utils_matrix.h"
 
 void print_matrix(int row, int col, int score, char **matrix) {
     system("clear");
@@ -10,7 +10,7 @@ void print_matrix(int row, int col, int score, char **matrix) {
         printf("\n");
     }
     printf("\n");
-    printf("Score: %d", score);
+    printf("Score: %d\n", score);
 }
 
 char **get_matrix(int row, int col) {
