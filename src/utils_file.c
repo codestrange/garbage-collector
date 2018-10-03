@@ -25,40 +25,6 @@ char *get_line(int file_descriptor) {
         }
     }
     line[index] = 0;
-<<<<<<< HEAD
-    List list = parse_line(line);
-    append_arraylist(&arraylist, list);
-    return arraylist;
-}
-
-List parse_line(char *line) {
-    List list = new_list(10);
-    int val = 0;
-    int row = 0;
-    int ok = 0;
-    while(*line) {
-        if(*line >= '0' && *line <= '9') {
-            val = val * 10 + (*line - '0');
-            ok = 0;
-        }
-        else if(*line == ','){
-            row = val;
-            val = 0;
-        }
-        else {
-            Position p = new_position(row, val);
-            append_list(&list, p);
-            val = 0;
-            ok = 1;
-        }
-        ++line;
-    }
-    if(!ok) {
-        Position p = new_position(row, val);
-        append_list(&list, p);
-    }
-    return list;
-=======
     return line;
 }
 
@@ -112,5 +78,4 @@ int parse_number(char *line, int *index, bool *isOk) {
     if (number == -1)
         *isOk = false;
     return number;
->>>>>>> d6484466eed4365859d9135629490cb37796d2ee
 }
