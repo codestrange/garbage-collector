@@ -1,9 +1,11 @@
-#ifndef abs(x)
-#define abs(x) (x > 0) ? x : -1 * x
-#endif
+#include <stdbool.h>
+
+int absolute(int x, int y) {
+    return (x - y) > 0 ? (x - y) : -1 * (x - y);
+}
 
 int tax_distance(int x1, int y1, int x2, int y2) {
-    return abs(x1 - x2) + abs(y1 - y2);
+    return absolute(x1, x2) + absolute(y1, y2);
 }
 
 int next_move(int x1, int y1, int x2, int y2) {
@@ -18,7 +20,7 @@ int next_move(int x1, int y1, int x2, int y2) {
 
 int fmd(char **matrix) {
     int rx, ry;
-    int breaking = 0;
+    bool breaking = false;
     int bx, by, bs = 0;
     //Getting the bot position
     for (int x = 0; x < 15; ++x) {
@@ -26,12 +28,12 @@ int fmd(char **matrix) {
             if (matrix[x][y] == 'X') {
                 rx = x;
                 ry = y;
-                breaking = 1;
+                breaking = true;
+                break;
             }
         }
-        if (breaking) {
+        if (breaking)
             break;
-        }
     }
     //Getting the nearest garbage
     for (int x = 0; x < 15; ++x) {
