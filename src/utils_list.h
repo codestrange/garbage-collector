@@ -11,12 +11,6 @@ typedef struct List {
     int capacity;
 } List;
 
-typedef struct ArrayList {
-    List *array;
-    int size;
-    int capacity;
-} ArrayList;
-
 Position new_position(int row, int col);
 
 List new_list(int capacity);
@@ -32,19 +26,5 @@ Position remove_list(List *list, int index);
 Position pop_list(List *list);
 
 Position index_list(List *list, int index);
-
-ArrayList new_arraylist(int capacity);
-
-void insert_arraylist(ArrayList *arraylist, int index, List item);
-
-void append_arraylist(ArrayList *arraylist, List item);
-
-void clear_arraylist(ArrayList *arraylist);
-
-List remove_arraylist(ArrayList *arraylist, int index);
-
-List pop_arraylist(ArrayList *arraylist);
-
-List index_arraylist(ArrayList *arraylist, int index);
 
 #endif

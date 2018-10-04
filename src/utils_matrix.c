@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "utils_matrix.h"
 
 void print_matrix(int row, int col, int score, char **matrix) {
@@ -10,7 +11,7 @@ void print_matrix(int row, int col, int score, char **matrix) {
         printf("\n");
     }
     printf("\n");
-    printf("Score: %d\n", score);
+    printf("Puntuación: %d\n", score);
 }
 
 char **get_matrix(int row, int col) {
