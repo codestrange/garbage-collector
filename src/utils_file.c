@@ -1,19 +1,23 @@
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "utils_file.h"
 #include "utils_list.h"
 
-int get_file(int file_name) {
-    int file_descriptor = open(file_name, O_RDONLY, 0664);
+int get_file(char *file_name) {
+    int file_descriptor = open(file_name, O_RDWR | O_CREAT, 0664);
     return file_descriptor;
 }
 
-char *get_line(int file_descriptor) {
+char *get_line(int file_descriptor, bool *isEOF) {
     int index = 0;
     int top = 100;
     char *line = malloc(top * sizeof(char));
     char buffer;
+    bool _isEOF = true;
     while (read(file_descriptor, &buffer, 1)) {
+        _isEOF = false;
         line[index++] = buffer;
         if (index >= top) {
             top *= 2;
@@ -24,24 +28,24 @@ char *get_line(int file_descriptor) {
             return line;
         }
     }
+    *isEOF = _isEOF;
     line[index] = 0;
     return line;
 }
 
-List get_garbages(int file_descriptor) {
-    char *line = get_file(file_descriptor);
-    List result = parse_line(line);
+List get_garbages(int file_descriptor, bool *isEOF, bool *isOk) {
+    char *line = get_line(file_descriptor, isEOF);
+    List result = parse_line(line, isOk);
     return result;
 }
 
-List parse_line(char *line) {
+List parse_line(char *line, bool *isOk) {
     int index = 0;
-    bool isOk = true;
     List list = new_list(5);
     while (line[index]) {
-        Position pos = parse_position(line, &index, &isOk);
+        Position pos = parse_position(line, &index, isOk);
         if (line[index] != ' ' && line[index] != 0)
-            isOk = false;
+            *isOk = false;
         if (!isOk) {
             clear_list(&list);
             return list;
