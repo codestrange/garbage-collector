@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "utils_list.h"
 
-int get_file(char *file_name);
+int get_file(const char *file_name);
 
 char *get_line(int file_descriptor, bool *isEOF);
 

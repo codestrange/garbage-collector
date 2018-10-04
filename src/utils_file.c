@@ -5,7 +5,7 @@
 #include "utils_file.h"
 #include "utils_list.h"
 
-int get_file(char *file_name) {
+int get_file(const char *file_name) {
     int file_descriptor = open(file_name, O_RDWR | O_CREAT, 0664);
     return file_descriptor;
 }
