@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include "logit_game.h"
+#include "logic_game.h"
 #include "movement.h"
-#include "utils_file.h"
-#include "utils_list.h"
-#include "utils_matrix.h"
+#include "utils/utils_file.h"
+#include "utils/utils_list.h"
+#include "utils/utils_matrix.h"
 
 void print_error(char* error) {
     system("clear");
@@ -23,9 +23,9 @@ int main(int argc, const char **argv) {
     }
     const char *fn_garbages = argv[1];
     int fd = get_file(fn_garbages);
-    int turns = 20;
+    int turns = 1000;
     int frequency = 10;
-    int temp_frequency = 10;
+    int temp_frequency = frequency;
     char **matrix = get_matrix(15, 15);
     int score = 0;
     int points = 10;
@@ -37,6 +37,7 @@ int main(int argc, const char **argv) {
     print_matrix(15, 15, score, matrix);
     while (turns--) {
         char c;
+        scanf("%c", &c);
         bool isEOF = false, isOk = true;
         if (temp_frequency-- == frequency) {
             List garbages = get_garbages(fd, &isEOF, &isOk);
@@ -67,7 +68,6 @@ int main(int argc, const char **argv) {
         }
         score += temp_score;
         print_matrix(15, 15, score, matrix);
-        scanf("%c", &c);
     }
     close(fd);
 }
