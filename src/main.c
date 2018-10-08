@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <dlfcn.h>
 #include "logic_game.h"
-#include "movement.h"
 #include "utils/utils_file.h"
 #include "utils/utils_list.h"
 #include "utils/utils_matrix.h"
@@ -22,6 +22,9 @@ int main(int argc, const char **argv) {
             return 0;
     }
     const char *fn_garbages = argv[1];
+    const char *fn_movement = argv[2];
+    void *handler = dlopen(fn_movement, RTLD_NOW);
+    int(* fmd)(char**) = dlsym(handler, "fmd");
     int fd = get_file(fn_garbages);
     int turns = 1000;
     int frequency = 10;
@@ -69,5 +72,6 @@ int main(int argc, const char **argv) {
         score += temp_score;
         print_matrix(15, 15, score, matrix);
     }
+    dlclose(handler);
     close(fd);
 }
