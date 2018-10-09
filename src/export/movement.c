@@ -18,7 +18,7 @@ int next_move(int x1, int y1, int x2, int y2) {
     return 3;
 }
 
-int fmd(char **matrix) {
+int fdm(char **matrix) {
     int rx, ry;
     bool breaking = false;
     int bx, by, bs = 0;

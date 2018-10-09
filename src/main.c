@@ -24,7 +24,7 @@ int main(int argc, const char **argv) {
     const char *fn_garbages = argv[1];
     const char *fn_movement = argv[2];
     void *handler = dlopen(fn_movement, RTLD_NOW);
-    int(* fmd)(char**) = dlsym(handler, "fmd");
+    int(* fmd)(char**) = dlsym(handler, "fdm");
     int fd = get_file(fn_garbages);
     int turns = 1000;
     int frequency = 10;
